@@ -1,7 +1,4 @@
-const {
-  crawlTree,
-  twoSum,
-} = require('../index');
+const { crawlTree, twoSum } = require('../index');
 
 describe('Чекпоинт Algorithms', () => {
   describe('Проход по дереву', () => {
@@ -12,7 +9,11 @@ describe('Чекпоинт Algorithms', () => {
     let tree;
     beforeEach(() => {
       tree = [
-        [[['П', 'р'], 'и'], ['в', ['е', 'т']]], [['и', 'к'], 'и'],
+        [
+          [['П', 'р'], 'и'],
+          ['в', ['е', 'т']],
+        ],
+        [['и', 'к'], 'и'],
       ];
     });
     it('собирает буквы в слово', () => {
@@ -20,13 +21,17 @@ describe('Чекпоинт Algorithms', () => {
       expect(word).toBe('Приветики');
     });
     it('не использует читы', () => {
-      expect(crawlTree.toString()).not.toMatch(/П[\s\S]*р[\s\S]*и[\s\S]*в[\s\S]*е[\s\S]*т[\s\S]*и[\s\S]*к[\s\S]*и/mi);
+      expect(crawlTree.toString()).not.toMatch(
+        /П[\s\S]*р[\s\S]*и[\s\S]*в[\s\S]*е[\s\S]*т[\s\S]*и[\s\S]*к[\s\S]*и/im
+      );
     });
     it('не использует flat', () => {
       expect(crawlTree.toString()).not.toContain('.flat');
     });
     it('использует рекурсию', () => {
-      expect(crawlTree.toString()).toMatch(/crawlTree[\s\S]*crawlTree/m);
+      expect(crawlTree.toString()).toMatch(
+        /(crawlTree[\s\S]*crawlTree)|(=>\s*{[\s\S]*crawlTree)/m
+      );
     });
   });
   describe('Поиск индексов двух чисел которые суммируются в заданное число', () => {
