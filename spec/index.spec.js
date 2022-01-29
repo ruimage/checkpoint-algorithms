@@ -11,6 +11,8 @@ describe("Чекпоинт Algorithms", () => {
      */
     let tree;
     beforeEach(() => {
+      jest.clearAllMocks();
+
       tree = [
         [
           [["П", "р"], "и"],
@@ -19,23 +21,26 @@ describe("Чекпоинт Algorithms", () => {
         [["и", "к"], "и"],
       ];
     });
+
     it("собирает буквы в слово", () => {
       const word = crawlTree(tree);
       expect(word).toBe("Приветики");
     });
-    it("не использует читы", () => {
-      expect(crawlTree.toString()).not.toMatch(
-        /П[\s\S]*р[\s\S]*и[\s\S]*в[\s\S]*е[\s\S]*т[\s\S]*и[\s\S]*к[\s\S]*и/im
-      );
+
+    it("собирает другие буквы в другое слово", () => {
+      const anotherTree = [
+        ["П", "и"],
+        ["с", ["т", ["о"]]],
+        "л",
+        [["е", "т"], [["и", "к"]]],
+        "и",
+      ];
+      const word = crawlTree(anotherTree);
+      expect(word).toBe("Пистолетики");
     });
-    it("не использует flat", () => {
-      expect(crawlTree.toString()).not.toContain(".flat");
-    });
-    it("не использует join", () => {
-      expect(crawlTree.toString()).not.toContain(".join");
-    });
+
     it("использует рекурсию", () => {
-      const SHOULD_HAVE_BEEN_RECURSIVELY_CALLED_TIMES = 16;
+      const SHOULD_HAVE_BEEN_RECURSIVELY_CALLED_TIMES = 8;
 
       functions.crawlTree(tree);
       expect(mock).toHaveBeenCalledTimes(
@@ -50,18 +55,21 @@ describe("Чекпоинт Algorithms", () => {
       const target = 6;
       expect(twoSum(arr, target)).toEqual([1, 2]);
     });
+
     it("отрабатывает для второго случая", () => {
       const arr = [2, 7, 11, 15];
       const target = 9;
       expect(twoSum(arr, target)).toEqual([0, 1]);
     });
+
     it("отрабатывает для третьего случая", () => {
       const arr = [3, 3];
       const target = 6;
       expect(twoSum(arr, target)).toEqual([0, 1]);
     });
-    it("использует хэш-таблицу для более эффективного решения", () => {
-      expect(twoSum.toString()).toMatch("{}");
+
+    xit("использует хэш-таблицу для более эффективного решения", () => {
+      expect(twoSum.toString()).toMatch("= {}");
     });
   });
 });
