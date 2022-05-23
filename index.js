@@ -44,5 +44,9 @@ function twoSum(arr, target) {
 }
 
 // Всё, что ниже, нужно для тестов. Не изменяй этот код
-const functions = { crawlTree, twoSum };
+const functions = {
+  crawlTree,
+  twoSum,
+};
 module.exports = functions;
+
